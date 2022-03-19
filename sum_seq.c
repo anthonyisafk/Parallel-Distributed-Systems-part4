@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <sys/time.h>
 
 void print_vector(const float* vec, const int size) {
     for (int i = 0; i < size; i++) {
@@ -44,7 +45,16 @@ int main(int argc, char** argv) {
     }
     printf("Initialized array.\n");
 
+    struct timeval stop, start;
+    gettimeofday(&start, NULL);
+
     printf("\n >>> Performing sum, size = %d, alpha = %f ...\n", size, alpha);
     seq_sum(x, alpha, size);
+    gettimeofday(&stop, NULL);
     printf(" >>> Done.\n\n");
+
+    uint timediff = (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec;
+    printf("Sum: size = %d, alpha = %f, ELAPSED TIME[us] = %d\n\n", size, alpha, timediff);
+
+
 }
