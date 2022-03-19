@@ -1,16 +1,17 @@
 CC = gcc
 OUT = -o
 BUILD = build/
+INCLUDE = util/seq_helpers.c
 
 default: all
 
 .PHONY = clean
 
 axpy_seq:
-	$(CC) axpy_seq.c $(OUT) $(BUILD)axpy_seq
+	$(CC) axpy_seq.c $(OUT) $(BUILD)axpy_seq $(INCLUDE)
 
 sum_seq:
-	$(CC) sum_seq.c $(OUT) $(BUILD)sum_seq
+	$(CC) sum_seq.c $(OUT) $(BUILD)sum_seq $(INCLUDE)
 
 all: axpy_seq sum_seq
 

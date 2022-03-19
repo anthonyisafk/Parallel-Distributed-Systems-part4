@@ -6,23 +6,12 @@
  * @emails: aantonii@ece.auth.gr - anestisk@ece.auth.gr
  */ 
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <limits.h>
 #include <sys/time.h>
 
-void print_vector(const float* vec, const int size) {
-    for (int i = 0; i < size; i++) {
-        printf(" %f ", vec[i]);
-    }
-    printf("\n\n");
-}
-
-void seq_axpy(const float* x, const float alpha, const int size, float* y) {
-    for (int i = 0; i < size; i++) {
-        y[i] += alpha * x[i];
-    }
-}
+#include "util/seq_helpers.h"
 
 int main(int argc, char** argv) {
     if (argc < 3) {

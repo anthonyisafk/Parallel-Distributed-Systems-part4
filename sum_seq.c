@@ -11,21 +11,7 @@
 #include <limits.h>
 #include <sys/time.h>
 
-void print_vector(const float* vec, const int size) {
-    for (int i = 0; i < size; i++) {
-        printf(" %f ", vec[i]);
-    }
-    printf("\n\n");
-}
-
-float seq_sum(const float* x, const float alpha, const int size) {
-    float result = 0;
-    for (int i = 0; i < size; i++) {
-        result += alpha * x[i];
-    }
-
-    return result;
-}
+#include "util/seq_helpers.h"
 
 int main(int argc, char** argv) {
     if (argc < 3) {
@@ -55,6 +41,4 @@ int main(int argc, char** argv) {
 
     uint timediff = (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec;
     printf("Sum: size = %d, alpha = %f, ELAPSED TIME[us] = %d\n\n", size, alpha, timediff);
-
-
 }
