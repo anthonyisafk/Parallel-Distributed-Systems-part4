@@ -69,10 +69,10 @@ int main(int argc, char** argv) {
     free(x);
     
     struct timeval stop, start;
+    pthread_t threads[num_threads];
     gettimeofday(&start, NULL);
 
     printf("\n >>> Performing sum, threads = %d, size = %d, alpha = %f ...\n", num_threads, size, alpha);
-    pthread_t threads[num_threads];
     for (int i = 0; i < num_threads; i++) {
         pthread_create(&threads[i], NULL, sum_pthread, (void*) &args[i]);
     }
