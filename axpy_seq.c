@@ -42,4 +42,6 @@ int main(int argc, char** argv) {
 
     uint timediff = (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec;
     printf("Axpy: size = %d, alpha = %f, ELAPSED TIME[us] = %d\n\n", size, alpha, timediff);
+
+    return 0;
 }

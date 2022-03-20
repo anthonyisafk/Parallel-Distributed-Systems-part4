@@ -24,7 +24,6 @@ int main(int argc, char** argv) {
 
     printf("Initializing array...\n");
     float* x = (float*)malloc(size * sizeof(float));
-    float* y = (float*)malloc(size * sizeof(float));
     for (int i = 0; i < size; i++) {
         float x_value = 5.6 * rand() / RAND_MAX;
         x[i] = (rand() > RAND_MAX / 2) ? x_value : -1.0 * x_value;
@@ -41,4 +40,6 @@ int main(int argc, char** argv) {
 
     uint timediff = (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec;
     printf("Sum: size = %d, alpha = %f, ELAPSED TIME[us] = %d\n\n", size, alpha, timediff);
+
+    return 0;
 }
