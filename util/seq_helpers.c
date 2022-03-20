@@ -22,6 +22,7 @@ float seq_sum(const float* x, const float alpha, const int size) {
 }
 
 void print_vector(const float* vec, const int size) {
+    printf("Printing vector of size %d\n", size);
     for (int i = 0; i < size; i++) {
         printf(" %f ", vec[i]);
     }
