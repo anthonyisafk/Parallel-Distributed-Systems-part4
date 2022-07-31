@@ -56,16 +56,9 @@ int main(int argc, char** argv) {
     for (int i = 0 ; i < num_threads; i++) {
         args[i].alpha = alpha;
         args[i].size = (i != num_threads - 1) ? partial_size : size - i * partial_size;
-        args[i].x = (float*)malloc(args[i].size * sizeof(float));
-        args[i].y = (float*)malloc(args[i].size * sizeof(float));
-
-        for (int j = 0; j < args[i].size; j++) {
-            args[i].x[j] = x[i * partial_size + j];
-            args[i].y[j] = y[i * partial_size + j];
-        }
+        args[i].x = x + i * partial_size;
+        args[i].y = y + i * partial_size;
     }
-    free(x);
-    free(y);
 
     struct timeval stop, start;
     pthread_t threads[num_threads];

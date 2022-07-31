@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "seq_helpers.h": "c"
-    }
+    },
+    "workbench.colorTheme": "Andromeda"
 }
