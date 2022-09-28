@@ -41,4 +41,4 @@ all: axpy_seq axpy_pthread axpy_cilk sum_seq sum_pthread sum_cilk
 all_clean: clean axpy_seq axpy_pthread axpy_cilk sum_seq sum_pthread sum_cilk
 
 clean:
-	rm -f $(BUILD)axpy_seq $(BUILD)axpy_pthread $(BUILD)axpy_cilk $(BUILD)sum_seq $(BUILD)sum_pthread $(BUILD)sum_cilk
+	rm -f $(BUILD)*
