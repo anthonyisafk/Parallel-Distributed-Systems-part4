@@ -1,7 +1,7 @@
 /**
- * @file: sum_pthread.c
+ * @file: sum_cilk.c
  * @brief: Implement the sum of a vector a * X[N], where `a` is a scalar.
- * This is the threaded implementation of the algorithm, based on pthreads.
+ * This is the threaded implementation of the algorithm, based on openCilk.
  * @authors: Antonios Antoniou, Anestis Kaimakamidis
  * @emails: aantonii@ece.auth.gr - anestisk@ece.auth.gr
  */

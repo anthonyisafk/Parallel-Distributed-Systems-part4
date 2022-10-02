@@ -1,7 +1,7 @@
 /**
- * @file: axpy_pthread.c
+ * @file: axpy_cilk.c
  * @brief: Implement axpy: y = a*x + y, where `a` is a scalar.
- * This is the threaded implementation of the algorithm, based on pthreads.
+ * This is the threaded implementation of the algorithm, based on openCilk.
  * @authors: Antonios Antoniou, Anestis Kaimakamidis
  * @emails: aantonii@ece.auth.gr - anestisk@ece.auth.gr
  */ 
