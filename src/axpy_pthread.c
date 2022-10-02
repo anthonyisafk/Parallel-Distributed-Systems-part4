@@ -28,7 +28,7 @@ void* axpy_pthread(void* data) {
 
 int main(int argc, char** argv) {
     if (argc < 4) {
-        printf("\nUsage: ./axpy_seq <threads> <size> <alpha>\n\n");
+        printf("\nUsage: ./axpy_pthread <threads> <size> <alpha>\n\n");
         exit(1);
     }
 

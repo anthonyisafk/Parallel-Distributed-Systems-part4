@@ -31,7 +31,7 @@ void* sum_pthread(void* data) {
 
 int main(int argc, char** argv) {
     if (argc < 4) {
-        printf("\nUsage: ./sum_seq <threads> <size> <alpha>\n\n");
+        printf("\nUsage: ./sum_pthread <threads> <size> <alpha>\n\n");
         exit(1);
     }
 

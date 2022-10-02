@@ -16,7 +16,7 @@
 
 int main(int argc, char** argv) {
     if (argc < 4) {
-        printf("\nUsage: ./axpy_seq <threads> <size> <alpha>\n\n");
+        printf("\nUsage: ./axpy_cilk <threads> <size> <alpha>\n\n");
         exit(1);
     }
 
