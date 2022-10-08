@@ -44,9 +44,9 @@ int main(int argc, char** argv) {
     gettimeofday(&stop, NULL);
     printf(" >>> Done.\n\n");
 
-    uint timediff = (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec;
+    float timediff = ((stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec);
     printf(
-        "Axpy: threads = %d, size = %d, alpha = %f, ELAPSED TIME[us] = %d\n\n",
+        "Axpy: threads = %d, size = %d, alpha = %f, ELAPSED TIME[us] = %f\n\n",
         num_threads, size, alpha, timediff
     );
 
