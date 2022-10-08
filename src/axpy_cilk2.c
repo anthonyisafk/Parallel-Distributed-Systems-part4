@@ -32,6 +32,10 @@ void write_csv(float elapsedTime, int size){
 
 int main (int argc, char** argv)
 {
+    if (argc < 4) {
+        printf("\nUsage: ./axpy_cilk2 <threads> <size> <alpha>\n\n");
+        exit(1);
+    }
 
     const int num_threads = atoi(argv[1]);
     const int size = atoi(argv[2]);

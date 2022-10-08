@@ -1,5 +1,0 @@
-method, size, time
-pthread, 500000, 338.651703
-pthread, 600000, 307.716736
-pthread, 700000, 516.455933
-pthread, 800000, 564.601624

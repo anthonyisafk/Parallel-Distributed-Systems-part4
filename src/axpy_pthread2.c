@@ -87,7 +87,7 @@ void * produce(void * data){
 
 int main(int argc, char** argv) {
     if (argc < 4) {
-        printf("\nUsage: ./axpy_pthread <threads> <size> <alpha>\n\n");
+        printf("\nUsage: ./axpy_pthread2 <threads> <size> <alpha>\n\n");
         exit(1);
     }
 

@@ -46,7 +46,11 @@ void* axpy_pthread(void* data) {
 
 int main (int argc, char** argv)
 {
-    
+    if (argc < 4) {
+        printf("\nUsage: ./multicilk <threads> <size> <alpha>\n\n");
+        exit(1);
+    }
+
     const int num_threads = atoi(argv[1]);
     const int size = atoi(argv[2]);
     const float alpha = atof(argv[3]);
