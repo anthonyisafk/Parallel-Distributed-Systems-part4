@@ -47,7 +47,8 @@
 \usepackage[numbers,sort&compress]{natbib}
 
 \makeatletter\let\c@lofdepth\relax\let\c@lotdepth\relax\makeatother
-\usepackage[small,bf,tight]{subfigure}
+% \usepackage[small,bf,tight]{subfigure}
+\usepackage{subcaption}
 
 %Math symbols of the dsfont style. Enables the use of \mathds{}
 \usepackage{dsfont}
@@ -176,14 +177,98 @@ The parameters given to the various resulting executables are:\\
 • \textbf{Cases}: Number of arrays that must be produced and consumed.\\
 • \textbf{Alpha}: The constant float value, used to perform both axpy and sum.\\
 \subsection{Conducted tests}
-For the purposes of our research, we conduct tests for various sizes, number of threads, and number of arrays to be produced and consumed. More specifically, our main test consists of of \textbf{100 arrays} of \textbf{size 1000}. The \textbf{thread numbers} (n) are \textbf{2, 3, and 4}. We also use a test case for $n=2$ and varying sizes.
-An extra to our research is the compilation, and testing of the \textbf{sequential counterpart} of the operations, so we can verify the scaling of the algorithm.
+For the purposes of our research, we conduct tests for various sizes, number of threads, and number of arrays to be produced and consumed.
+\subsubsection{Pthreads vs openCilk}
+Our main test consists of of \textbf{10 arrays} of \textbf{sizes 1000000, 2000000, and 5000000}. The \textbf{thread numbers} (n) are \textbf{2, 4, 6, 8, 12, and 16}. 
+
+\begin{figure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.9\linewidth]{../data/image/method/cilk_1000000.png}
+        \caption{openCilk - 1000000 elements}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.9\linewidth]{../data/image/method/pthread_1000000.png}
+        \caption{pthread - 1000000 elements}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.9\linewidth]{../data/image/method/cilk_2000000.png}
+        \caption{openCilk - 2000000 elements}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.9\linewidth]{../data/image/method/pthread_2000000.png}
+        \caption{pthread - 2000000 elements}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.9\linewidth]{../data/image/method/cilk_5000000.png}
+        \caption{openCilk - 5000000 elements}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.9\linewidth]{../data/image/method/pthread_5000000.png}
+        \caption{pthread - 5000000 elements}
+    \end{subfigure}
+\end{figure}
+
+We will observe the differences between the two schemes a little closer, for a \textbf{selected number of threads: 2, 4, 8, and 16.} 
+
+\begin{figure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.9\linewidth]{../data/image/thread/2-threads.png}
+        \caption{Comparison for 2 threads}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.9\linewidth]{../data/image/thread/4-threads.png}
+        \caption{Comparison for 4 threads}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.9\linewidth]{../data/image/thread/8-threads.png}
+        \caption{Comparison for 8 threads}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.9\linewidth]{../data/image/thread/16-threads.png}
+        \caption{Comparison for 16 threads}
+    \end{subfigure}
+\end{figure}
+
+\subsubsection{Benchmarks between the three schemes}
+The programs construct \textbf{10 arrays} of varying sizes, using $n=4$, which was shown to be the best performing parameter in the analysis above. For that parameter, we use arrays of \textbf{size 500000, 600000, 700000, 800000, 900000, 1000000, 2000000, 3000000, 4000000, and 5000000}.
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[scale=.5]{../data/image/benchmark/4-threads.png}
+    \caption{Final comparison}
+\end{figure}
+
+\section{Conclusion}
+The tests above show that openCilk's work stealing feature can offer more room for optimization, but less potential for deterministic behavior and predictability. All pthreads implementations seem to be scaling in a more predictable and linear manner, at least up until a number of threads that is in par with the specifications of the machine on which the tests were conducted.\\
+\\
+However, on the first batch of tests, for a large enough size, when work stealing actually makes sense, it is easy to see that openCilk is able to outperform pthreads, where the workload is statically assigned and prone to imbalance.\\
+\\
+Regarding the second batch, larger sizes and more threads than the ones natively built into the hardware lead openCilk to larger execution times, while more ideal conditions render openCilk capable of outperforming pthreads once again.\\
+\\
+Last, but not least, the \textbf{Multicilk comparison} leaves much to be desired. Generally speaking, the conducted tests are the perfect way for the average programmer to realize that no scheme, paradigm or design is a panacea. Each one of them needs to be carefully engineered and fit into a problem that is fit for its advantages and hides its disadvantages. Multicilk needs a large number of threads, a large enough problem, and most importantly a vast amount of data communication between underlying threads. Even so, one could be a little skeptical about its ease and merits of use. This would be the reason why there is little to no bibliography found on the matter \cite{pusapaty2022combining}.
 
 
-
-
-%\renewcommand\bibname{\gr{Βιβλιογραφία}}
-%\bibliographystyle{IEEEtranN}
-%\en{\bibliography{citations}}
+% \renewcommand\bibname{\gr{Βιβλιογραφία}}
+\bibliographystyle{IEEEtranN}
+\en{\bibliography{citations}}
 
 \end{document}
