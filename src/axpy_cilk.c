@@ -14,6 +14,19 @@
 #include "util/cilk_helpers.h"
 #include "util/seq_helpers.h"
 
+void write_csv(float elapsedTime, int threads){
+    FILE *f;
+    char name[10] = "data2.csv";
+    
+    f = fopen(name, "a");
+    
+
+    fprintf(f, "cilk, %d, %fus\n", threads, elapsedTime);
+    
+    return;
+}
+
+
 int main(int argc, char** argv) {
     if (argc < 4) {
         printf("\nUsage: ./axpy_cilk <threads> <size> <alpha>\n\n");
@@ -49,6 +62,8 @@ int main(int argc, char** argv) {
         "Axpy: threads = %d, size = %d, alpha = %f, ELAPSED TIME[us] = %f\n\n",
         num_threads, size, alpha, timediff
     );
+
+    write_csv(timediff, num_threads);
 
     return 0;
 }

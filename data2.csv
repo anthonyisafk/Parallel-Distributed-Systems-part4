@@ -1,0 +1,13 @@
+method, threads, time
+pthread, 2, 940.000000us
+pthread, 4, 755.000000us
+pthread, 6, 909.000000us
+pthread, 8, 1525.000000us
+pthread, 12, 1363.000000us
+pthread, 16, 1044.000000us
+cilk, 2, 708.000000us
+cilk, 4, 709.000000us
+cilk, 6, 725.000000us
+cilk, 8, 1952.000000us
+cilk, 12, 972.000000us
+cilk, 16, 1917.000000us

@@ -26,6 +26,19 @@ void* axpy_pthread(void* data) {
     seq_axpy(args->x, args->alpha, args->size, args->y);
 }
 
+void write_csv(float elapsedTime, int threads){
+    FILE *f;
+    char name[10] = "data2.csv";
+    
+    f = fopen(name, "a");
+    
+    if(threads == 2) fprintf(f, "method, threads, time\n");
+    fprintf(f, "pthread, %d, %fus\n", threads, elapsedTime);
+    
+    return;
+}
+
+
 int main(int argc, char** argv) {
     if (argc < 4) {
         printf("\nUsage: ./axpy_pthread <threads> <size> <alpha>\n\n");
@@ -79,6 +92,8 @@ int main(int argc, char** argv) {
         "Axpy: threads = %d, size = %d, alpha = %f, ELAPSED TIME[us] = %d\n\n",
         num_threads, size, alpha, timediff
     );
+
+    write_csv(timediff, num_threads);
 
     return 0;
 }
