@@ -23,7 +23,8 @@ for i in eachindex(u_methods)
             threads[i_m][indices], times[i_m][indices],
             title = m * ", array size = " * string(s),
             xlabel = "Threads",
-            ylabel = "Time[ms]"
+            ylabel = "Time[ms]",
+            legend = false
         );
         savefig(p, "./image/method/" * m * "_" * string(s) * ".png");
     end
