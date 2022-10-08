@@ -18,14 +18,14 @@
 
 #define NUM 1600
 
-void write_csv(float elapsedTime, int size){
+void write_csv(float elapsedTime, int size, int num_threads){
     FILE *f;
-    char name[10] = "data.csv";
+    char name[15] = "data/data.csv";
     
     f = fopen(name, "a");
     
 
-    fprintf(f, "cilk, %d, %f\n", size, elapsedTime);
+    fprintf(f, "cilk, %d, %d, %f\n", size, num_threads, elapsedTime);
     
     return ;
 }
@@ -90,7 +90,7 @@ int main (int argc, char** argv)
     
     printf("Time: %f\n", eltime/counter);
 
-    write_csv(eltime/counter, size);
+    write_csv(eltime/counter, size, num_threads);
 
     
     return 0;

@@ -31,15 +31,15 @@ typedef struct {
 } thread_args;
 
 
-void write_csv(float elapsedTime, int size){
+void write_csv(float elapsedTime, int size, int threads){
     FILE *f;
-    char name[10] = "data.csv";
+    char name[15] = "data/data.csv";
     
     f = fopen(name, "a");
     
     //headers
-    if(size == 500000) fprintf(f, "method, size, time\n");
-    fprintf(f, "pthread, %d, %f\n", size, elapsedTime);
+    if(size == 500000) fprintf(f, "method, size, threads, time\n");
+    fprintf(f, "pthread, %d, %d, %f\n", size, threads, elapsedTime);
     
     return ;
 }
@@ -136,7 +136,7 @@ int main(int argc, char** argv) {
 
     printf("Time: %f\n", eltime/counter);
 
-    write_csv(eltime/counter, size);
+    write_csv(eltime/counter, size, num_threads);
 
     return 0;
 }

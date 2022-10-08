@@ -26,14 +26,14 @@ void* axpy_pthread(void* data) {
     seq_axpy(args->x, args->alpha, args->size, args->y);
 }
 
-void write_csv(float elapsedTime, int threads){
+void write_csv(float elapsedTime, int threads, int size){
     FILE *f;
     char name[10] = "data2.csv";
     
     f = fopen(name, "a");
     
-    if(threads == 2) fprintf(f, "method, threads, time\n");
-    fprintf(f, "pthread, %d, %fus\n", threads, elapsedTime);
+    if(threads == 1 && size == 1000000) fprintf(f, "method, threads, time\n");
+    fprintf(f, "pthread, %d, %d, %f\n", size, threads, elapsedTime);
     
     return;
 }
@@ -87,13 +87,13 @@ int main(int argc, char** argv) {
     gettimeofday(&stop, NULL);
     printf(" >>> Done.\n\n");
 
-    uint timediff = (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec;
+    float timediff = ((stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec)/1000.0;
     printf(
-        "Axpy: threads = %d, size = %d, alpha = %f, ELAPSED TIME[us] = %d\n\n",
+        "Axpy: threads = %d, size = %d, alpha = %f, ELAPSED TIME[us] = %f\n\n",
         num_threads, size, alpha, timediff
     );
 
-    write_csv(timediff, num_threads);
+    write_csv(timediff, num_threads, size);
 
     return 0;
 }

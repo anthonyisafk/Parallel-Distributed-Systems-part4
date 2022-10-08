@@ -26,14 +26,14 @@ typedef struct {
     float* y; 
 } axpy_args;
 
-void write_csv(float elapsedTime, int size){
+void write_csv(float elapsedTime, int size, int threads){
     FILE *f;
-    char name[10] = "data.csv";
+    char name[15] = "data/data.csv";
     
     f = fopen(name, "a");
     
 
-    fprintf(f, "multicilk, %d, %f\n", size, elapsedTime);
+    fprintf(f, "multicilk, %d, %d, %f\n", size, threads, elapsedTime);
     
     return;
 }
@@ -131,7 +131,7 @@ int main (int argc, char** argv)
     free(y);
 
 
-    write_csv(eltime/counter, size);
+    write_csv(eltime/counter, size, num_threads);
 
     return 0;
 }

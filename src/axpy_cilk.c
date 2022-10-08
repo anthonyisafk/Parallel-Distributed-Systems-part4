@@ -14,14 +14,14 @@
 #include "util/cilk_helpers.h"
 #include "util/seq_helpers.h"
 
-void write_csv(float elapsedTime, int threads){
+void write_csv(float elapsedTime, int threads, int size){
     FILE *f;
     char name[10] = "data2.csv";
     
     f = fopen(name, "a");
     
 
-    fprintf(f, "cilk, %d, %fus\n", threads, elapsedTime);
+    fprintf(f, "cilk, %d, %d, %f\n", size, threads, elapsedTime);
     
     return;
 }
@@ -57,13 +57,13 @@ int main(int argc, char** argv) {
     gettimeofday(&stop, NULL);
     printf(" >>> Done.\n\n");
 
-    float timediff = ((stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec);
+    float timediff = ((stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec)/1000.0;
     printf(
         "Axpy: threads = %d, size = %d, alpha = %f, ELAPSED TIME[us] = %f\n\n",
         num_threads, size, alpha, timediff
     );
 
-    write_csv(timediff, num_threads);
+    write_csv(timediff, num_threads, size);
 
     return 0;
 }
