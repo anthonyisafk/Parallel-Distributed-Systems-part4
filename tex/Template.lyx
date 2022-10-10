@@ -313,7 +313,15 @@ Different multithreading schemes
 
 \begin_layout Standard
 Pthreads makes use of condition variables for managing critical sections,
- while openCilk is limited to mutexes.
+ while openCilk is limited to mutexes
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ajkunic2012comparison"
+literal "false"
+
+\end_inset
+
+.
  However, one important advantage of the latter is work stealing.
  More specifically, when a pthread is created, it is very strictly assigned
  a certain piece of workload.
@@ -375,7 +383,15 @@ producer-consumer
  algebra operation on it.
  The operations we have programmed for the purposes of this project are
  axpy and a general sum of the elements of the array, sequentially, via
- pthreads and via openCilk.
+ pthreads and via openCilk
+\begin_inset CommandInset citation
+LatexCommand cite
+key "7965120"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
